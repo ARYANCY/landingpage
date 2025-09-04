@@ -8,8 +8,8 @@ const Login = () => {
 
   const images = {
     cta: {
-      light: '/images/cta-light.png',
-      dark: '/images/cta-dark.png'
+      light: '/images/Now-or-Never.svg',
+      dark: '/images/download.svg'
     },
     highlight: {
       light: '/images/highlight-light.png',
