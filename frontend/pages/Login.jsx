@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/Login.css';
-
+import {Now} from '../public/Now-or-Never.svg'
 const Login = () => {
   const handleGoogleRegister = () => {
     window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
@@ -8,8 +8,8 @@ const Login = () => {
 
   const images = {
     cta: {
-      light: '/public/Now-or-Never.svg',
-      dark: '/public/download.svg'
+      light: '/Now-or-Never.svg',
+      dark: '/download.svg'
     },
     highlight: {
       light: '/images/highlight-light.png',
