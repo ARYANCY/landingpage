@@ -296,13 +296,10 @@
 .dashboard-section {
   margin: 56px auto;
   max-width: 1080px;
-  padding: 40px 44px;
-  border-radius: 16px;
+  padding: 48px 44px;
+  border-radius: 18px;
   transition: background 0.3s ease, color 0.3s ease;
   text-align: center;
-}
-
-.dashboard-section {
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(14px);
   border: 1px solid rgba(200, 220, 255, 0.3);
@@ -311,73 +308,113 @@
 }
 
 [data-theme="dark"] .dashboard-section {
-  background: rgba(20, 20, 35, 0.85);
-  border: 1px solid rgba(100, 255, 255, 0.2);
-  box-shadow: 0 0 20px rgba(0, 200, 255, 0.25);
+  background: rgba(20, 20, 35, 0.88);
+  border: 1px solid rgba(100, 255, 255, 0.25);
+  box-shadow: 0 0 25px rgba(0, 200, 255, 0.25);
   color: #eee;
 }
 
 .dashboard-section h2 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 20px;
   background: linear-gradient(135deg, #4a90e2, #6ab8f7, #9d7dff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
 }
 
 [data-theme="dark"] .dashboard-section h2 {
-  text-shadow: 0 0 10px #4a90e2, 0 0 20px #ff00ff;
+  text-shadow: 0 0 12px #4a90e2, 0 0 22px #ff00ff;
 }
 
 .dashboard-section p {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   line-height: 1.7;
-  margin-bottom: 25px;
+  margin-bottom: 32px;
   opacity: 0.95;
 }
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
   align-items: stretch;
 }
 
-.feature-card {
-  padding: 24px;
-  border-radius: 14px;
-  text-align: center;
-  height: 100%;
-  transition: transform 0.35s, box-shadow 0.35s, background 0.35s;
+/* Make the last card span full width on desktop */
+.feature-card:last-child {
+  grid-column: 1 / -1; /* spans all columns */
 }
 
+/* On smaller screens (tablet/mobile), just stack them */
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  .feature-card:last-child {
+    grid-column: auto; /* reset */
+  }
+}
+
+
+/* Feature cards */
 .feature-card {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(200, 220, 255, 0.3);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding: 28px 24px;
+  border-radius: 16px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(200, 220, 255, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Gradient glow layer */
+.feature-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.25), rgba(255, 106, 213, 0.2));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.feature-card:hover::before {
+  opacity: 1;
 }
 
 .feature-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(74, 144, 226, 0.25),
+              0 8px 20px rgba(255, 106, 213, 0.25);
 }
 
+/* Dark mode cards */
 [data-theme="dark"] .feature-card {
   background: rgba(25, 25, 50, 0.85);
   border: 1px solid rgba(100, 255, 255, 0.25);
-  box-shadow: 0 0 15px rgba(0, 200, 255, 0.2);
+  box-shadow: 0 0 18px rgba(0, 200, 255, 0.2);
 }
 
 [data-theme="dark"] .feature-card:hover {
-  box-shadow: 0 0 25px rgba(255, 0, 255, 0.5);
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.5),
+              0 0 18px rgba(74, 144, 226, 0.4);
 }
 
+/* Titles */
 .feature-card h3 {
   font-size: 1.5rem;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  font-weight: 700;
   color: #222;
+  position: relative;
+  z-index: 1;
 }
 
 [data-theme="dark"] .feature-card h3 {
@@ -385,10 +422,14 @@
   text-shadow: 0 0 8px #6ab8f7;
 }
 
+/* Text */
 .feature-card p {
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.6;
   color: #333;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
 }
 
 [data-theme="dark"] .feature-card p {
