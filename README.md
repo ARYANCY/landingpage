@@ -31,7 +31,7 @@ Live Links:
 
 ### 1. Clone repo
 ```bash
-    git clone https://github.com/YOUR-USERNAME/fest-coding.git
+    git clone https://github.com/ARYANCY/landingpage.git
     cd fest-coding
 ```
 ### 2. Backend Setup
