@@ -10,6 +10,35 @@ router.get('/user', (req, res) => {
   }
 });
 
+// Update/add user's phone number after authentication
+router.post('/user/number', async (req, res) => {
+  try {
+    if (!req.isAuthenticated || !req.isAuthenticated()) {
+      return res.status(401).json({ success: false, message: 'Not authenticated' });
+    }
+
+    const { number } = req.body || {};
+    if (number === undefined || number === null || String(number).trim() === '') {
+      return res.status(400).json({ success: false, message: 'Number is required' });
+    }
+
+    // Basic validation: allow digits, optional +, 7-15 length typical for E.164
+    const cleaned = String(number).trim();
+    const valid = /^\+?[0-9]{7,15}$/.test(cleaned);
+    if (!valid) {
+      return res.status(400).json({ success: false, message: 'Invalid number format' });
+    }
+
+    // Persist to current user document
+    req.user.number = cleaned;
+    await req.user.save();
+
+    return res.json({ success: true, message: 'Number saved', user: req.user });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: 'Internal server error', error: error.message });
+  }
+});
+
 
 router.post('/send-welcome', async (req, res) => {
   try {

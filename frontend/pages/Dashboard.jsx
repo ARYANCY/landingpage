@@ -79,8 +79,13 @@ const Dashboard = () => {
             <h3>Networking</h3>
             <p>Meet peers, mentors, and industry leaders to expand your professional network.</p>
           </div>
+          <div className="feature-card">
+            <h3>Innovation Showcase</h3>
+            <p>Present your projects, ideas, or startups and get feedback from the community and experts.</p>
+          </div>
         </div>
       </section>
+
 
       <section className="dashboard-section">
         <h2>What You May Achieve</h2>

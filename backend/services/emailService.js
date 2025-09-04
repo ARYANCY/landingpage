@@ -1,36 +1,59 @@
 const nodemailer = require('nodemailer');
 
-const createTransporter = () => {
+const createTransporter = async () => {
+  if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+    return nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+  }
+
+  const testAccount = await nodemailer.createTestAccount();
   return nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.ethereal.email',
+    port: 587,
+    secure: false,
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
+      user: testAccount.user,
+      pass: testAccount.pass
     }
   });
 };
 
 const sendEmail = async (to, subject, text, html = null) => {
   try {
-    const transporter = createTransporter();
+    const transporter = await createTransporter();
 
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
+    const fromAddress = process.env.EMAIL_USER
+      ? `CodeFest Team <${process.env.EMAIL_USER}>`
+      : 'CodeFest Test <no-reply@ethereal.email>';
+
+    const info = await transporter.sendMail({
+      from: fromAddress,
       to,
       subject,
       text,
       html: html || text
-    };
+    });
 
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully:', info.messageId);
+    const previewUrl = nodemailer.getTestMessageUrl(info) || null;
+    console.log('Email sent successfully:', info.messageId, previewUrl ? `Preview: ${previewUrl}` : '');
 
     return {
       success: true,
-      messageId: info.messageId
+      messageId: info.messageId,
+      previewUrl
     };
   } catch (error) {
-    console.error('Email sending failed:', error);
+    console.error('Email sending failed:', {
+      message: error.message,
+      code: error.code,
+      response: error.response,
+      command: error.command
+    });
     return {
       success: false,
       error: error.message

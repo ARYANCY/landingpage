@@ -31,14 +31,12 @@ passport.use(new GoogleStrategy({
       isNewUser = true;
     }
     
-    // Send welcome email for new users
     if (isNewUser && email) {
       try {
         await sendWelcomeEmail(email, displayName);
         console.log(`Welcome email sent to new user: ${email}`);
       } catch (emailError) {
         console.error('Failed to send welcome email:', emailError);
-        // Don't fail the login if email fails
       }
     }
     

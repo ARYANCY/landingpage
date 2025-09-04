@@ -22,7 +22,7 @@ app.use(cors({
 }));
 
 if (process.env.NODE_ENV === 'production') {
-  app.set('trust proxy', 1); 
+  app.set('trust proxy', 1);
 }
 
 app.use(session({
@@ -32,7 +32,7 @@ app.use(session({
   store: MongoStore.create({
     mongoUrl: process.env.MONGO_URI,
     collectionName: 'sessions',
-    ttl: 24 * 60 * 60 
+    ttl: 24 * 60 * 60
   }),
   cookie: {
     maxAge: 24 * 60 * 60 * 1000, 
