@@ -106,13 +106,13 @@ const Dashboard = () => {
             </ul>
           </section>
 
-          {/* Event Form Section */}
           <section className="dashboard-section event-register">
             <h2 className="text-center text-2xl font-bold mb-4">
               Hurry up! Enter your details and win big prizes 🏆
             </h2>
-            <EventForm />
+            <EventForm user={user} />
           </section>
+
 
         </>
       )}
