@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/Login.css';
-import {Now} from '../public/Now-or-Never.svg'
+
 const Login = () => {
   const handleGoogleRegister = () => {
     window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
@@ -9,19 +9,19 @@ const Login = () => {
   const images = {
     cta: {
       light: '/Now-or-Never.svg',
-      dark: '/download.svg'
+      dark: '/download.svg',
     },
     highlight: {
-      light: '/images/highlight-light.png',
-      dark: '/images/highlight-dark.png'
+      light: '/hi.jpg',
+      dark: '/d.jpg'
     },
     about: {
-      light: '/images/about-light.png',
-      dark: '/images/about-dark.png'
+      light: '/a.jpg',
+      dark: '/ab.jpg'
     },
     facts: {
-      light: '/images/facts-light.png',
-      dark: '/images/facts-dark.png'
+      light: '/w.jpg',
+      dark: '/fa.jpg'
     }
   };
 
@@ -33,7 +33,7 @@ const Login = () => {
 
 
       <section className="highlight-section">
-        <img src={images.highlight[theme]} alt="Highlight" className="section-image" />
+        <img src={images.highlight[theme]} className="section-image" />
         <h2>Don't Miss the Chance!</h2>
         <p>
           CodeFest 2025 happens once a year. Compete, learn, and network with the brightest minds
@@ -42,14 +42,14 @@ const Login = () => {
       </section>
 
       <section className="cta-section">
-        <img src={images.cta[theme]} alt="CTA" className="section-image" />
+        <img src={images.cta[theme]}className="section-image" />
         <h1>Register for CodeFest 2025</h1>
         <p>Sign up with Google and join the ultimate coding celebration</p>
         <button onClick={handleGoogleRegister}>Register with Google</button>
       </section>
 
       <section className="about-fest">
-        <img src={images.about[theme]} alt="About" className="section-image" />
+        <img src={images.about[theme]} className="section-image" />
         <h2>About CodeFest</h2>
         <p>
           CodeFest is a 3-day coding festival that brings together developers, students, and
@@ -59,7 +59,7 @@ const Login = () => {
       </section>
 
       <section className="facts-section">
-        <img src={images.facts[theme]} alt="Facts" className="section-image" />
+        <img src={images.facts[theme]}  className="section-image" />
         <h2>Interesting Facts</h2>
         <ul>
           <li>Our previous edition hosted 500+ participants from 20+ colleges.</li>
