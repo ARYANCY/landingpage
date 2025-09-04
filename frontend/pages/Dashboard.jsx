@@ -30,13 +30,13 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-page">
-      {/* Loading or no user fallback */}
+
       {loading && <div className="cardF">Loading...</div>}
       {!loading && !user && <div className="cardF">User not found.</div>}
 
       {!loading && user && (
         <>
-          {/* Hero Section */}
+
           <section className="dashboard-hero">
             <img src={heroImage} alt="Hero Banner" className="hero-image" />
             <div className="hero-overlay">
@@ -47,7 +47,6 @@ const Dashboard = () => {
             </div>
           </section>
 
-          {/* Motivation */}
           <section className="motivation">
             <h2>Keep Coding. Keep Creating.</h2>
             <p>
@@ -56,7 +55,6 @@ const Dashboard = () => {
             </p>
           </section>
 
-          {/* User Card */}
           <div className="user-card">
             <img src={user.avatar} alt="avatar" className="avatar" />
             <h2>{user.name}</h2>
@@ -69,7 +67,6 @@ const Dashboard = () => {
             </button>
           </div>
 
-          {/* Features Section */}
           <section className="dashboard-section">
             <h2>What Our Fest Offers</h2>
             <p>
@@ -96,7 +93,6 @@ const Dashboard = () => {
             </div>
           </section>
 
-          {/* Achievements Section */}
           <section className="dashboard-section">
             <h2>What You May Achieve</h2>
             <p>
