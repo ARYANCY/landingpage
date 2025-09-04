@@ -4,6 +4,9 @@
   --accent-light-alt: #6AB8F7;
   --accent-dark: #ff7ee3;
   --accent-dark-alt: #7ab6ff;
+  --img-size: 320px;
+  --img-gap: 50px;
+  --section-pad: 70px;
 }
 
 [data-theme="dark"] {
@@ -17,7 +20,7 @@ body {
   background: linear-gradient(135deg, #D0E8FF, #6AB8F7, #4A90E2);
   background-size: 600% 600%;
   animation: gradientBG 20s ease infinite;
-  transition: all 0.3s ease;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 [data-theme="dark"] body {
@@ -27,165 +30,173 @@ body {
 }
 
 @keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
 }
 @keyframes gradientBGDark {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
 }
 
 .login-page {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
-  transition: all 0.3s ease;
   position: relative;
   z-index: 1;
 }
 
+/* COMMON CARD SECTIONS */
 .cta-section,
 .highlight-section,
 .about-fest,
 .facts-section {
-  position: relative;
-  margin-bottom: 50px;
-  padding: 40px;
-  border-radius: 16px;
+  margin-bottom: 60px;
+  padding: var(--section-pad);
+  border-radius: 20px;
   backdrop-filter: blur(12px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.15);
-  transition: all 0.4s ease;
-  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.2);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  min-height: 400px;
 }
 
-[data-theme="dark"] .cta-section,
-[data-theme="dark"] .highlight-section,
-[data-theme="dark"] .about-fest,
-[data-theme="dark"] .facts-section {
-  box-shadow: 0 10px 28px rgba(0,0,0,0.5);
+.highlight-section { background: linear-gradient(135deg, #E0F0FF, #B0D4F5) }
+.about-fest       { background: linear-gradient(135deg, #D0EBFF, #90C4EB) }
+.facts-section    { background: linear-gradient(135deg, #B0D9FF, #4A90E2) }
+
+[data-theme="dark"] .highlight-section { background: linear-gradient(135deg, #1A1F3C, #0A101F) }
+[data-theme="dark"] .about-fest       { background: linear-gradient(135deg, #10152A, #1B1F3B) }
+[data-theme="dark"] .facts-section    { background: linear-gradient(135deg, #121526, #0A0F1F) }
+
+.highlight-section:hover,
+.about-fest:hover,
+.facts-section:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 14px 30px rgba(74, 144, 226, 0.3);
 }
-
-.highlight-section { background: linear-gradient(135deg, #E0F0FF, #B0D4F5); }
-.about-fest { background: linear-gradient(135deg, #D0EBFF, #90C4EB); }
-.facts-section { background: linear-gradient(135deg, #B0D9FF, #4A90E2); }
-
-[data-theme="dark"] .highlight-section { background: linear-gradient(135deg, #1A1F3C, #0A101F); }
-[data-theme="dark"] .about-fest { background: linear-gradient(135deg, #10152A, #1B1F3B); }
-[data-theme="dark"] .facts-section { background: linear-gradient(135deg, #121526, #0A0F1F); }
 
 .cta-section h1,
 .highlight-section h2,
 .about-fest h2,
 .facts-section h2 {
-  font-weight: 700;
+  font-weight: 800;
   background: linear-gradient(135deg, #4A90E2, #6AB8F7);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  transition: all 0.3s ease;
+  background-clip: text;
+  margin-top: 0;
 }
+
 [data-theme="dark"] .cta-section h1,
 [data-theme="dark"] .highlight-section h2,
 [data-theme="dark"] .about-fest h2,
 [data-theme="dark"] .facts-section h2 {
-  background: linear-gradient(135deg, #ff7ee3, #7ab6ff);
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent-dark-alt));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .cta-section p,
 .highlight-section p,
 .about-fest p,
-.facts-section p,
-.facts-section ul {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: #222;
-  transition: color 0.3s;
+.facts-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+  margin: 10px 0 20px;
+  color: var(--text-color);
 }
 
 [data-theme="dark"] .cta-section p,
 [data-theme="dark"] .highlight-section p,
 [data-theme="dark"] .about-fest p,
-[data-theme="dark"] .facts-section p,
-[data-theme="dark"] .facts-section ul {
-  color: #eee;
+[data-theme="dark"] .facts-section p {
+  color: #ddd;
+}
+
+/* IMAGE + TEXT SECTIONS */
+.highlight-section,
+.about-fest {
+  display: grid;
+  grid-template-columns: 1fr var(--img-size);
+  align-items: center;
+  gap: var(--img-gap);
 }
 
 .section-image {
-  position: absolute;
-  width: 120px;
-  height: 120px;
+  width: 100%;
+  max-width: var(--img-size);
+  height: auto;
   object-fit: contain;
-  top: 20px;
-  transition: all 0.4s ease, transform 0.8s ease;
-  animation: float 5s ease-in-out infinite alternate;
-  z-index: 1;
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
-[data-theme="light"] .section-image { right: 20px; }
-[data-theme="dark"] .section-image { left: 20px; }
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-12px) translateX(2px); }
-  100% { transform: translateY(0px); }
+.section-image:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 15px rgba(0,0,0,0.25));
 }
 
-.facts-section ul {
-  list-style: disc inside;
-  margin-top: 20px;
-  padding-left: 0;
+.section-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  max-width: 600px;
 }
-.facts-section li {
-  margin-bottom: 12px;
-  padding-left: 10px;
-  position: relative;
-}
-.facts-section li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  font-size: 1.2rem;
-  top: 0;
-  color: #4A90E2;
-  transition: color 0.3s;
-}
-[data-theme="dark"] .facts-section li::before { color: #ff7ee3; }
 
-.highlight-section:hover,
-.about-fest:hover,
-.facts-section:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 12px 28px rgba(74, 144, 226, 0.25);
+/* ORDER SWAP (light → text left, dark → text right) */
+[data-theme="light"] .highlight-section .section-image,
+[data-theme="light"] .about-fest .section-image {
+  grid-column: 2;
+}
+[data-theme="light"] .highlight-section .section-content,
+[data-theme="light"] .about-fest .section-content {
+  grid-column: 1;
+}
+
+[data-theme="dark"] .highlight-section .section-image,
+[data-theme="dark"] .about-fest .section-image {
+  grid-column: 1;
+}
+[data-theme="dark"] .highlight-section .section-content,
+[data-theme="dark"] .about-fest .section-content {
+  grid-column: 2;
+}
+
+/* CTA */
+.cta-section,
+.facts-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .cta-section {
-  text-align: center;
   background: rgba(255,255,255,0.85);
   border-radius: 20px;
   padding: 50px 30px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.2);
   backdrop-filter: blur(15px);
-  overflow: hidden;
   position: relative;
-  animation: pulseBG 5s ease-in-out infinite alternate;
 }
 [data-theme="dark"] .cta-section {
   background: rgba(10,10,30,0.7);
   box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-  animation: pulseBGDark 5s ease-in-out infinite alternate;
 }
 
 .cta-section::before {
   content: '';
   position: absolute;
-  width: 400px;
-  height: 400px;
+  width: 420px;
+  height: 420px;
   border-radius: 50%;
   background: rgba(255,255,255,0.15);
-  top: -50px;
-  left: -50px;
+  top: -60px;
+  left: -60px;
   filter: blur(60px);
   animation: glowCircle 8s ease-in-out infinite alternate;
   z-index: 0;
@@ -196,13 +207,12 @@ body {
 
 .cta-section h1 {
   font-size: 3rem;
-  font-weight: 800;
   margin-bottom: 15px;
-  animation: slideText 6s ease-in-out infinite alternate;
+  font-weight: 800;
 }
 
 .cta-section button {
-  background: linear-gradient(135deg, #4A90E2, #cbd9e5);
+  background: linear-gradient(135deg, #4A90E2, #6AB8F7);
   color: #fff;
   padding: 16px 36px;
   font-size: 1.2rem;
@@ -210,9 +220,8 @@ body {
   border: none;
   border-radius: 16px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   box-shadow: 0 8px 20px rgba(74,144,226,0.35);
-  animation: bounceBtn 2s ease-in-out infinite;
 }
 [data-theme="dark"] .cta-section button {
   background: linear-gradient(135deg, #ff7ee3, #7ab6ff);
@@ -228,51 +237,116 @@ body {
   box-shadow: 0 14px 30px rgba(255,126,227,0.45);
 }
 
-@keyframes pulseBG {
-  0% { background: rgba(255,255,255,0.85); }
-  50% { background: rgba(230,240,255,0.9); }
-  100% { background: rgba(255,255,255,0.85); }
+/* FACTS */
+.facts-section ul {
+  list-style: none;
+  margin: 20px auto 0;
+  padding: 0;
+  max-width: 700px;
+  text-align: center;
 }
-@keyframes pulseBGDark {
-  0% { background: rgba(10,10,30,0.7); }
-  50% { background: rgba(20,20,50,0.75); }
-  100% { background: rgba(10,10,30,0.7); }
+.facts-section li {
+  font-size: 1.05rem;
+  margin-bottom: 14px;
+  padding-left: 22px;
+  position: relative;
+  line-height: 1.6;
+  display: inline-block;
+  text-align: left;
 }
-@keyframes slideText {
-  0% { transform: translateX(0px); }
-  50% { transform: translateX(5px); }
-  100% { transform: translateX(0px); }
+.facts-section li::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  font-size: 0.9rem;
+  top: 4px;
+  color: var(--accent-light);
+  transition: color 0.3s ease;
 }
-@keyframes bounceBtn {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(0); }
+[data-theme="dark"] .facts-section li::before {
+  color: var(--accent-dark);
 }
-@keyframes glowCircle {
-  0% { transform: translate(0,0) scale(1); opacity: 0.7; }
-  50% { transform: translate(20px,10px) scale(1.1); opacity: 0.9; }
-  100% { transform: translate(0,0) scale(1); opacity: 0.7; }
+.facts-section li:hover {
+  transform: translateX(6px);
+  transition: transform 0.3s ease;
 }
 
-@media (max-width: 992px) {
-  .cta-section h1 { font-size: 2.6rem; }
-  .highlight-section h2,
-  .about-fest h2,
-  .facts-section h2 { font-size: 2rem; }
+/* EFFECTS */
+@keyframes glowCircle {
+  0% { transform: translate(0,0) scale(1); opacity: 0.7 }
+  50% { transform: translate(20px,10px) scale(1.1); opacity: 0.9 }
+  100% { transform: translate(0,0) scale(1); opacity: 0.7 }
 }
-@media (max-width: 768px) {
-  .cta-section h1 { font-size: 2.2rem; }
-  .cta-section p { font-size: 1rem; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  :root { --img-size: 250px; --img-gap: 30px }
+  .cta-section h1 { font-size: 2.2rem }
+  .cta-section p,
   .highlight-section p,
   .about-fest p,
-  .facts-section p { font-size: 1rem; }
-  .section-image { width: 90px; height: 90px; top: 10px; }
+  .facts-section p { font-size: 1rem }
 }
-@media (max-width: 480px) {
-  .cta-section h1 { font-size: 1.8rem; }
-  .cta-section p { font-size: 0.95rem; }
+@media (max-width: 600px) {
   .highlight-section,
-  .about-fest,
-  .facts-section { padding: 25px; }
-  .section-image { display: none; }
+  .about-fest {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+  }
+  .section-image { order: -1; max-width: 180px; margin: 0 auto 20px }
+  .section-content { max-width: 100%; }
+  .cta-section h1 { font-size: 1.8rem }
+}
+
+/* 🌞 LIGHT MODE REFINEMENTS */
+[data-theme="light"] body {
+  background: linear-gradient(135deg, #fdfdfd, #f0f8ff, #e6f0ff);
+  background-size: 600% 600%;
+  animation: gradientBGLight 18s ease infinite;
+}
+@keyframes gradientBGLight {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
+[data-theme="light"] .highlight-section,
+[data-theme="light"] .about-fest,
+[data-theme="light"] .facts-section {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(200, 220, 255, 0.3);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08),
+              0 2px 6px rgba(74,144,226,0.12);
+  backdrop-filter: blur(14px);
+  border-radius: 24px;
+}
+[data-theme="light"] h1,
+[data-theme="light"] h2 {
+  background: linear-gradient(135deg, #4A90E2, #ff6ad5, #6AB8F7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+[data-theme="light"] p {
+  color: #444;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+[data-theme="light"] .section-image:hover {
+  transform: scale(1.06) rotate(-1deg);
+  filter: drop-shadow(0 8px 20px rgba(74,144,226,0.25))
+          drop-shadow(0 4px 10px rgba(255,106,213,0.25));
+}
+[data-theme="light"] .cta-section button {
+  background: linear-gradient(135deg, #6AB8F7, #4A90E2, #ff6ad5);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(74,144,226,0.3),
+              0 3px 12px rgba(255,106,213,0.25);
+}
+[data-theme="light"] .cta-section button:hover {
+  background: linear-gradient(135deg, #357abd, #ff4fb9);
+  transform: translateY(-6px) scale(1.1);
+  box-shadow: 0 10px 25px rgba(74,144,226,0.35),
+              0 5px 15px rgba(255,106,213,0.3);
 }
