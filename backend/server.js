@@ -6,6 +6,9 @@ const session = require('express-session');
 const passport = require('passport');
 const MongoStore = require('connect-mongo');
 
+
+const eventRoutes = require('./routes/eventRoutes');
+
 dotenv.config();
 require('./config/passport');
 
@@ -46,6 +49,7 @@ app.use(passport.session());
 
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
+app.use('/api/events', eventRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
