@@ -1,0 +1,215 @@
+:root { --text-color: #333; }
+[data-theme="dark"] { --text-color: #fff; }
+
+:root {
+  --text-color: #222;
+  --accent: #4A90E2;
+  --accent-2: #6AB8F7;
+  --accent-3: #D0E8FF;
+}
+
+[data-theme="dark"] {
+  --text-color: #fff;
+  --accent: #00c6ff;
+  --accent-2: #0072ff;
+  --accent-3: #4f4f4f;
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #D0E8FF, #6AB8F7, #4A90E2);
+  background-size: 600% 600%;
+  color: var(--text-color);
+  animation: gradientBG 15s ease infinite;
+  transition: color 0.3s;
+}
+
+[data-theme="dark"] body {
+  background: linear-gradient(135deg, #1B1F3B, #0A0F1F, #121526);
+  animation: gradientBGDark 20s ease infinite;
+}
+
+@keyframes gradientBG { 
+  0% { background-position: 0% 50% } 
+  50% { background-position: 100% 50% } 
+  100% { background-position: 0% 50% } 
+}
+@keyframes gradientBGDark { 
+  0% { background-position: 0% 50% } 
+  50% { background-position: 100% 50% } 
+  100% { background-position: 0% 50% } 
+}
+
+.card {
+  background-color: rgba(255,255,255,0.9);
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  max-width: 400px;
+  margin: 50px auto;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.3s;
+}
+[data-theme="dark"] .card { background-color: rgba(0,0,0,0.7); }
+.card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4A90E2;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+button:hover { background-color: #6AB8F7; transform: translateY(-2px); }
+
+img.avatar { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; }
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 30px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.4s ease, background 0.5s ease;
+}
+
+[data-theme="dark"] .navbar {
+  background: rgba(10, 20, 40, 0.7);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.nav-left h2 {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--text-color);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  transition: color 0.3s;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav-right a {
+  position: relative;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.nav-right a:hover {
+  color: var(--accent);
+  transform: scale(1.05);
+}
+
+.nav-right a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+  border-radius: 5px;
+  animation: slide-in 0.4s ease forwards;
+}
+
+.nav-right a:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #ff4a8d, #6a82fb, #00e5ff);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+@keyframes slide-in {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.nav-right .toggle-container {
+  margin-left: 15px;
+}
+
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .nav-left h2 {
+    font-size: 1.6rem;
+  }
+
+  .nav-right {
+    gap: 18px;
+  }
+
+  .nav-right a {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+    border-radius: 0 0 15px 15px;
+  }
+
+  .nav-left h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .nav-right {
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .nav-right a {
+    font-size: 0.9rem;
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .nav-right .toggle-container {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-left h2 {
+    font-size: 1.3rem;
+  }
+
+  .nav-right {
+    gap: 8px;
+  }
+
+  .nav-right a {
+    font-size: 0.85rem;
+    padding: 5px 8px;
+  }
+}
