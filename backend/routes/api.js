@@ -10,7 +10,6 @@ router.get('/user', (req, res) => {
   }
 });
 
-// Update/add user's phone number after authentication
 router.post('/user/number', async (req, res) => {
   try {
     if (!req.isAuthenticated || !req.isAuthenticated()) {
@@ -21,15 +20,11 @@ router.post('/user/number', async (req, res) => {
     if (number === undefined || number === null || String(number).trim() === '') {
       return res.status(400).json({ success: false, message: 'Number is required' });
     }
-
-    // Basic validation: allow digits, optional +, 7-15 length typical for E.164
     const cleaned = String(number).trim();
     const valid = /^\+?[0-9]{7,15}$/.test(cleaned);
     if (!valid) {
       return res.status(400).json({ success: false, message: 'Invalid number format' });
     }
-
-    // Persist to current user document
     req.user.number = cleaned;
     await req.user.save();
 

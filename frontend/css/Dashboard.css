@@ -342,23 +342,20 @@
   align-items: stretch;
 }
 
-/* Make the last card span full width on desktop */
 .feature-card:last-child {
-  grid-column: 1 / -1; /* spans all columns */
+  grid-column: 1 / -1;
 }
 
-/* On smaller screens (tablet/mobile), just stack them */
 @media (max-width: 768px) {
   .features-grid {
     grid-template-columns: 1fr;
   }
   .feature-card:last-child {
-    grid-column: auto; /* reset */
+    grid-column: auto; 
   }
 }
 
 
-/* Feature cards */
 .feature-card {
   position: relative;
   padding: 28px 24px;
@@ -373,7 +370,6 @@
   cursor: pointer;
 }
 
-/* Gradient glow layer */
 .feature-card::before {
   content: "";
   position: absolute;
@@ -395,7 +391,6 @@
               0 8px 20px rgba(255, 106, 213, 0.25);
 }
 
-/* Dark mode cards */
 [data-theme="dark"] .feature-card {
   background: rgba(25, 25, 50, 0.85);
   border: 1px solid rgba(100, 255, 255, 0.25);
@@ -407,7 +402,6 @@
               0 0 18px rgba(74, 144, 226, 0.4);
 }
 
-/* Titles */
 .feature-card h3 {
   font-size: 1.5rem;
   margin-bottom: 14px;
@@ -422,7 +416,6 @@
   text-shadow: 0 0 8px #6ab8f7;
 }
 
-/* Text */
 .feature-card p {
   font-size: 1rem;
   line-height: 1.6;

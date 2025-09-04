@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../css/ToggleSwitch.css";
 
 export default function ToggleSwitch() {
-  // Initialize state from localStorage (if user already chose a theme)
   const [isOn, setIsOn] = useState(
     localStorage.getItem("theme") === "light" ? true : false
   );
-
-  // Update document theme whenever toggle changes
   useEffect(() => {
     if (isOn) {
       document.documentElement.setAttribute("data-theme", "light");

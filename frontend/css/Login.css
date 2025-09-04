@@ -48,7 +48,6 @@ body {
   z-index: 1;
 }
 
-/* COMMON CARD SECTIONS */
 .cta-section,
 .highlight-section,
 .about-fest,
@@ -116,7 +115,6 @@ body {
   color: #ddd;
 }
 
-/* IMAGE + TEXT SECTIONS */
 .highlight-section,
 .about-fest {
   display: grid;
@@ -148,7 +146,6 @@ body {
   max-width: 600px;
 }
 
-/* ORDER SWAP (light → text left, dark → text right) */
 [data-theme="light"] .highlight-section .section-image,
 [data-theme="light"] .about-fest .section-image {
   grid-column: 2;
@@ -165,6 +162,13 @@ body {
 [data-theme="dark"] .highlight-section .section-content,
 [data-theme="dark"] .about-fest .section-content {
   grid-column: 2;
+}
+.cta-section button {
+  position: relative;
+  z-index: 2;
+}
+.cta-section::before {
+  pointer-events: none; 
 }
 
 .cta-section,

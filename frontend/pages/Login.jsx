@@ -3,7 +3,7 @@ import "../css/Login.css";
 
 const Login = () => {
   const handleGoogleRegister = () => {
-    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
+   window.open(`${import.meta.env.VITE_API_URL}/auth/google`, "_self");
   };
 
   const images = useMemo(
