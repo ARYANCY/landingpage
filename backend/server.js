@@ -15,26 +15,27 @@ const apiRoutes = require('./routes/api');
 const app = express();
 
 app.use(express.json());
+
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+  origin: process.env.CLIENT_URL, 
   credentials: true
 }));
 
 if (process.env.NODE_ENV === 'production') {
-  app.set('trust proxy', 1);
+  app.set('trust proxy', 1); 
 }
 
 app.use(session({
-  secret: process.env.SESSION_SECRET ,
+  secret: process.env.SESSION_SECRET || 'dev_secret_change_me',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.MONGO_URI,
     collectionName: 'sessions',
-    ttl: 24 * 60 * 60
+    ttl: 24 * 60 * 60 
   }),
   cookie: {
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 24 * 60 * 60 * 1000, 
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     secure: process.env.NODE_ENV === 'production'
   }
