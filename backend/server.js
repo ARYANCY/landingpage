@@ -4,8 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
-const MongoStore = require('connect-mongo');
-
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 const eventRoutes = require('./routes/eventRoutes');
 
@@ -20,7 +19,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: process.env.CLIENT_URL, 
+  origin: process.env.CLIENT_URL,
   credentials: true
 }));
 
@@ -28,17 +27,23 @@ if (process.env.NODE_ENV === 'production') {
   app.set('trust proxy', 1);
 }
 
+// Session store compatible with mongodb@7
+const store = new MongoDBStore({
+  uri: process.env.MONGO_URI,
+  collection: 'sessions',
+});
+
+store.on('error', (error) => {
+  console.error('Session store error:', error);
+});
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URI,
-    collectionName: 'sessions',
-    ttl: 24 * 60 * 60
-  }),
+  store,
   cookie: {
-    maxAge: 24 * 60 * 60 * 1000, 
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     secure: process.env.NODE_ENV === 'production'
   }
@@ -53,11 +58,9 @@ app.use('/api/events', eventRoutes);
 
 mongoose.connect(process.env.MONGO_URI, {
   serverSelectionTimeoutMS: 10000,
-  ssl: true,
   tls: true,
-  tlsInsecure: false,
 })
-  .then(() => console.log('MongoDB connected'))
+  .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
 
 const PORT = process.env.PORT || 5000;
