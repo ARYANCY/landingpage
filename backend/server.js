@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'dev_secret_change_me',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
