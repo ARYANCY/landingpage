@@ -51,7 +51,12 @@ app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.use('/api/events', eventRoutes);
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, {
+  serverSelectionTimeoutMS: 10000,
+  ssl: true,
+  tls: true,
+  tlsInsecure: false,
+})
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
